@@ -1,0 +1,145 @@
+/*
+ALL CSS
+*/
+
+/*
+COLORS
+*/
+$light-grey : #f2f2f2; /*Light-grey*/
+$dark-grey : #969696 ; /*Dark-grey*/
+
+/*
+GLOBALS
+*/
+
+
+/** Blocs **/
+
+.wrap {
+    border:1px solid #ccc;
+    background: $light-grey;
+    padding: 10px;
+}
+
+.margtop { /*row*/
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+
+
+/** Texts **/
+
+h1 {
+    color: $dark-grey;
+    
+}
+
+.title {
+    font-size: 22px;
+    font-weight: bold;
+    color: $dark-grey;
+}
+
+
+
+
+/*
+SLIDER
+*/
+
+#slider {
+    position: relative;
+    width: 100%;
+    max-height: 450px;
+    height:auto; /* SUP*/
+    overflow: hidden;
+
+
+    img {
+        width: 970px;
+        max-width: 100%;
+        height: auto;
+        background: $dark-grey;/*SUP*/
+    }
+}
+      
+
+.fadeout {
+    opacity: 0;
+    -moz-transition: all 300ms;
+    -webkit-transition: all 300ms;
+    transition: all 300ms;
+
+    display: none;
+
+}
+
+.fadein {
+    opacity: 1;
+    -moz-transition: all 300ms;
+    -webkit-transition: all 300ms;
+    transition: all 300ms;
+
+    display: block;
+       
+}
+
+      
+
+.controls {
+    position: absolute; /*Position relative parent auto par fondation*/
+    top:45%;
+    left: 0;
+    width: 100%;
+}
+
+.prev, .next {
+    display: block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    background: $light-grey;
+    vertical-align: middle;
+    line-height: 30px;
+    cursor: pointer;
+    font-weight: bold;
+
+    &:hover {
+        background: $dark-grey;
+
+    }
+}
+
+
+.prev {
+     position: absolute;
+    left: 4%;
+
+}
+
+.next {
+    position: absolute;
+    right:4%;
+}
+
+.nav {
+    position:absolute;
+    bottom: 5px;
+    right: 30px;
+}
+
+
+.dots {
+    display: inline-block;
+    border-radius: 30px;
+    width: 10px;
+    height: 10px;
+    background: $light-grey;
+    cursor: pointer;
+
+    &:hover {
+        background: $dark-grey;
+
+    }
+}
