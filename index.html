@@ -16,28 +16,31 @@
 
     <div class="row">
       <div class="large-12 columns">
-        <div id="slider">
-              <div class="position"><img src="http://placehold.it/970x450/EFAD6B/ffffff&text=Slideshow1" alt=""></div>
-              <div class="position"><img src="http://placehold.it/970x450&text=Slideshow2" alt=""></div>
-              <div class="position"><img src="http://placehold.it/970x450&text=Slideshow3" alt=""></div>
-              <div class="position"><img src="http://placehold.it/970x450&text=Slideshow4" alt=""></div>
+          <div id="slider">
+              <img src="http://placehold.it/970x450/EFAD6B/ffffff&text=Slideshow1" alt="">
+              <img src="http://placehold.it/970x450&text=Slideshow2" alt="">
+              <img src="http://placehold.it/970x450&text=Slideshow3" alt="">
+              <img src="http://placehold.it/970x450&text=Slideshow4" alt="">
+
           </div>
           <div class="controls">
             <span class="prev">&lt;</span>
             <span class="next">&gt;</span>
           </div>
           <div class="nav">
-            <span id="dot1" class="dots"></span>
+            <!-- <span id="dot1" class="dots"></span>
             <span id="dot2" class="dots"></span>
             <span id="dot3" class="dots"></span>
-            <span id="dot4" class="dots"></span>
+            <span id="dot4" class="dots"></span> -->
           </div>
+          <div role="button" tabindex="0" class="button add-image">Ajouter 3 images</div>
       </div>
     </div>
 
     <div class="row"><!--ROW ADD NEW ARTICLE-->
         <div class=" small-12 columns margtop">
           <div class="wrap">
+          <div class="position newimage"></div>
             <p class="title">Ajouter une news</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias praesentium quo, sunt numquam optio dignissimos explicabo delectus dolore earum nobis quae recusandae quidem labore voluptas! Voluptate vero commodi, provident aspernatur.
             </p>
@@ -45,8 +48,8 @@
         </div>
       </div><!--END ROW ADD NEW ARTICLE-->
       <div class="row"><!--ROW ALL ARTICLES-->
-        <div class=" small-12 columns margtop">
-          <div class="wrap">
+        <div class=" small-12 columns margtop news-container">
+          <div class="wrap news ">
             <h2 class="title">Titre News</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias praesentium quo, sunt numquam optio dignissimos explicabo delectus dolore earum nobis quae recusandae quidem labore voluptas! Voluptate vero commodi, provident aspernatur.
             </p>
