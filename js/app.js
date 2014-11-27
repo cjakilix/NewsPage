@@ -30,7 +30,6 @@ jQuery(function($){
     $('.dots').click(function(){
 
         var numDot = $(this).attr( "id" );
-        /*console.log(numDot);*/
         var elem = numDot.split('dot');
         i= elem[1];
         i= i - 1 ;
