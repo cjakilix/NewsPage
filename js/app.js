@@ -4,30 +4,41 @@ jQuery(function($){
 
 /* SLIDER */
  
-sliderFade();
+var sliderModule = new BigSlider();
+var newsModule = new NewsModule();
+sliderModule.sliderFade();
+
 
     $('.dots').on('click',function(){
+
+        /*sliderModule.navDot();*/
 
         var numDot = $(this).attr( "id" );
         var elem = numDot.split('dot');
         i= elem[1];
         i= i - 1 ;
 
-        $sliderli.addClass("fadeout").removeClass("fadein");
-        $currentItem = $sliderli.eq(i);
-        $currentItem.addClass("fadein").removeClass("fadeout");
+        /*$('.dots').removeClass("dotsactive");
+        $(this).addClass("dotsactive");*/
+
+
+         sliderModule.sliderli.addClass("fadeout").removeClass("fadein");
+         sliderModule.currentItem = sliderModule.sliderli.eq(i);
+         sliderModule.currentItem.addClass("fadein").removeClass("fadeout");
+
+
 
     });
 
 
     $('.next').on('click',function(){ 
         
-            next();
+            sliderModule.next();
     });   
 
 
     $('.prev').on('click',function(){
-            prev();
+            sliderModule.prev();
 
     });
 
@@ -53,6 +64,9 @@ sliderFade();
                 $("<li class=\"fadeout\"><img src='" + url3 + "' /></li>").appendTo("#slider ul");
                 console.log('Call Ajax success');
 
+                sliderModule.updateValues();
+
+
             },// Fin success
                
             error : function(resultat, statut, erreur){
@@ -66,102 +80,30 @@ sliderFade();
     });//FIN ADD IMAGES
 
 
-
 /* NEWS */
 
-
+//Ajouter des news
 $('body').on('click','#add-article', function(){
     
-    addNews();
+    newsModule.addNews();
 
     return false;
-
 });
+
+//Modifier des news
+$('body').on('click','.modify-article', function(){
+    
+    newsModule.modifyNews.call(this);
+
+    return false;
+});
+
+
 
 
 
 });/////////////////////Fin chargement JQuery
 
-
-
-
-
-
-function addNews(){
-    
-    var newsTitle = $('#new-title').val(),
-        newsContent = $('#new-content').val();
-
-        alert( newsTitle + ' ' + newsContent + 'test');
-        console.log(newsTitle + ' ' + newsContent + 'consoletest');
-
-        $('#news-container').prepend('<div class="news">'+
-            '<h2 class="news-title">'+ newsTitle +'</h2>'+
-            '<div class="news-content"><p>'+ newsContent + '</p></div>'+
-            '<button class="button tiny modify-article">Modifier l\'article</button>'+
-            '<button class="button tiny delete-article" >Supprimer l\'article</button></div>')
-
-};
-
-
-
-
-
-   //Variable générales
-    var $slider = $('#slider'),
-    $sliderli = $('#slider li'),
-    $nbrli = $sliderli.length,
-    nbrliIndex = $nbrli -1,
-    i=0,
-    $currentItem = $('#slider li').eq(i); // le i étant réinit à 0 ci-dessus, la première image est à index 0
-
-
-    $.each($sliderli, function() {
-        $("<span id='dot" + (i+1) + "' class='dots'></span>").appendTo(".nav");
-        i++;
-    });
-
-
-    $sliderli.addClass('fadeout').removeClass('fadein');
-    $currentItem.addClass('fadein').removeClass('fadeout');
-
-
-
-    function next(){
-        i++; // incrémente le compteur
-        $sliderli.addClass("fadeout").removeClass("fadein"); // on cache les images
-
-        if( i > nbrliIndex ){
-            i = 0;
-        }
-
-        $currentItem = $sliderli.eq(i); // on définit la nouvelle image
-        $currentItem.addClass("fadein").removeClass("fadeout"); // puis on l'affiche
-    };
-
-    function prev(){
-        i--; // Décrémente le compteur
-        $sliderli.addClass("fadeout").removeClass("fadein");
-
-        if( i < 0 ){
-
-            i = nbrliIndex;
-        }
-
-        $currentItem = $sliderli.eq(i);
-        $currentItem.addClass("fadein").removeClass("fadeout");
-        
-    };
-
-
-    function sliderFade(){
-        setTimeout(function(){
-
-        next();
-        sliderFade();
-
-        }, 3000);
-    };  // fin SLIDER
 
 
 
