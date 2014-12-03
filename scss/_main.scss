@@ -2,11 +2,14 @@
 ALL CSS
 */
 
+/* TODO : FAIRE MIXIN POUR LA TRANSITION;
+
 /*
 COLORS
 */
 $light-grey : #f2f2f2; /*Light-grey*/
 $dark-grey : #969696 ; /*Dark-grey*/
+$mid-grey : #CCCCCC;
 
 /*
 GLOBALS
@@ -39,6 +42,10 @@ h1 {
     font-size: 22px;
     font-weight: bold;
     color: $dark-grey;
+}
+
+.redalert {
+    color: $alert-color;
 }
 
 
@@ -159,97 +166,18 @@ h1 {
     background: $dark-grey;
 }
 
-/* SLIDER
+/*
+NEWS
+*/
 
-#slider {
-    position: relative;
-    width: 100%;
-    max-height: 450px;
-    height:auto;
-    overflow: hidden;
-
-
-    img {
-        width: 970px;
-        max-width: 100%;
-        height: auto;
-        background: $dark-grey;SUP
-    }
+.news {
+    padding: 10px;
+    margin-bottom: 10px;
 }
-      
 
-.fadeout {
-    opacity: 0;
+.modify-news {
+    background: $mid-grey ;
     -moz-transition: all 300ms;
     -webkit-transition: all 300ms;
     transition: all 300ms;
-
-    display: none;
-
 }
-
-.fadein {
-    opacity: 1;
-    -moz-transition: all 300ms;
-    -webkit-transition: all 300ms;
-    transition: all 300ms;
-    transition: all 300ms;
-
-    display: block;
-       
-}
-
-      
-
-.controls {
-    position: absolute; Position relative parent auto par fondation
-    top:45%;
-    left: 0;
-    width: 100%;
-}
-
-.prev, .next {
-    display: block;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    background: $light-grey;
-    vertical-align: middle;
-    line-height: 30px;
-    cursor: pointer;
-    font-weight: bold;
-
-    &:hover {
-        background: $dark-grey;
-
-    }
-}
-
-
-.prev {
-     position: absolute;
-    left: 4%;
-
-}
-
-.next {
-    position: absolute;
-    right:4%;
-}
-
-
-
-.dots {
-    display: inline-block;
-    border-radius: 30px;
-    width: 10px;
-    height: 10px;
-    background: $light-grey;
-    cursor: pointer;
-    margin: 0 5px 0 0;
-
-    &:hover {
-        background: $dark-grey;
-
-    }
-} */

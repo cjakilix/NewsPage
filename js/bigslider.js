@@ -4,14 +4,18 @@ var BigSlider = function(){
 
 
     var sliderli;
+    var currentItem;
+    var nbrli;
+    var nbrliIndex;
+    var i;
         
 
     function updateValues(){
         sliderli = $('#slider li');
-        nbrli = sliderli.length,
-         nbrliIndex = nbrli -1,
-        i=0,
-        currentItem = $('#slider li').eq(i); //
+        nbrli = sliderli.length;
+        nbrliIndex = nbrli -1;
+        i=0;
+        currentItem = $('#slider li').eq(i);
 
 
         
@@ -71,6 +75,26 @@ var BigSlider = function(){
     };
 
 
+    function ajaxSuccess (data, statut){
+                var url1 = data.image1,
+                    url2 = data.image2,
+                    url3 = data.image3;
+
+                $("<li class=\"fadeout\" ><img src='" + url1 + "' /></li>").appendTo("#slider ul");
+                $("<li class=\"fadeout\"><img src='" + url2 + "' /></li>").appendTo("#slider ul");
+                $("<li class=\"fadeout\"><img src='" + url3 + "' /></li>").appendTo("#slider ul");
+                console.log('Call Ajax success');
+
+                updateValues();
+    };
+
+
+    function ajaxError (resultat, statut, erreur){
+        $('<span> > Une erreur s\'est produite</span>').appendTo(".add-image");
+        console.log('Erreur Call Ajax');
+    };   
+
+
     return {
         next: next,
         prev : prev,
@@ -79,7 +103,9 @@ var BigSlider = function(){
         nbrli : nbrli,
         sliderli : sliderli,
         currentItem : currentItem,
-        updateValues : updateValues
+        updateValues : updateValues,
+        ajaxSuccess : ajaxSuccess,
+        ajaxError : ajaxError
     }
 
 

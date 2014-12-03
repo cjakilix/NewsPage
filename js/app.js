@@ -8,6 +8,8 @@ var sliderModule = new BigSlider();
 var newsModule = new NewsModule();
 sliderModule.sliderFade();
 
+var parentDiv;
+
 
     $('.dots').on('click',function(){
 
@@ -53,26 +55,11 @@ sliderModule.sliderFade();
             type : 'GET',
             dataType: 'JSON',
             success : function(data, statut){ 
-
-
-                var url1 = data.image1,
-                    url2 = data.image2,
-                    url3 = data.image3;
-
-                $("<li class=\"fadeout\" ><img src='" + url1 + "' /></li>").appendTo("#slider ul");
-                $("<li class=\"fadeout\"><img src='" + url2 + "' /></li>").appendTo("#slider ul");
-                $("<li class=\"fadeout\"><img src='" + url3 + "' /></li>").appendTo("#slider ul");
-                console.log('Call Ajax success');
-
-                sliderModule.updateValues();
-
-
-            },// Fin success
+                sliderModule.ajaxSuccess(data, statut);
+            },
                
             error : function(resultat, statut, erreur){
-                $('<span> > Une erreur s\'est produite</span>').appendTo(".add-image");
-                console.log('Erreur Call Ajax');
-
+                sliderModule.ajaxError(resultat, statut, erreur);
             }
 
         }); //FIN Ajax call
@@ -82,24 +69,70 @@ sliderModule.sliderFade();
 
 /* NEWS */
 
-//Ajouter des news
-$('body').on('click','#add-article', function(){
-    
-    newsModule.addNews();
+    //Ajouter des news
+    $('body').on('click','#add-article', function(){
+        
+        newsModule.addNews();
 
-    return false;
-});
+        return false;
+    });
 
-//Modifier des news
-$('body').on('click','.modify-article', function(){
-    
-    newsModule.modifyNews.call(this);
+    //Modifier des news
+    $('body').on('click','.modify-article', function(){
+        
+        newsModule.getNewsValeurs.call(this);
+        newsModule.modifyNews.call(this);
 
-    return false;
-});
+        return false;
+    });
+
+    //Valider la modif des news
+    $('body').on('click','.save-modarticle', function(){
+
+        newsModule.getNewsValues.call(this);
+        newsModule.newsSave.call(this);
+
+        return false;
+    });
+
+    //Annuler la modif des news
+    $('body').on('click','.cancel-modarticle', function(){
+
+        newsModule.newsNoModify.call(this);
+
+        return false;
+    });
+
+    //Supprimer une news
+    $('body').on('click','.delete-article', function(){
+        
+        //newsModule.getNewsValeurs.call(this);
+        parentDiv = $(this).closest('article.news');
+        //console.log(parentDiv);
 
 
+    });
 
+
+    // Fermer la modale sans supprimer l'article
+
+    $('body').on('click','.close-mymodal', function(){
+
+        $('#myModal').foundation('reveal', 'close');
+
+        return false;
+    });
+
+
+        // Fermer la modale en supprimant l'article
+
+    $('body').on('click','.yesdelete-article', function(){
+
+        parentDiv.children().remove();
+        $('#myModal').foundation('reveal', 'close');
+        
+        
+    });
 
 
 });/////////////////////Fin chargement JQuery
