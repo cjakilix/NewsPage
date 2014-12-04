@@ -128,7 +128,7 @@ var parentDiv;
 
     $('body').on('click','.yesdelete-article', function(){
 
-        parentDiv.children().remove();
+        parentDiv.remove();
         $('#myModal').foundation('reveal', 'close');
         
         
