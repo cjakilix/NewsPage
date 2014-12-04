@@ -3,138 +3,146 @@ $(document).foundation();
 jQuery(function($){
 
 /* SLIDER */
-    //Variable générales
-    var $slider = $('#slider'),
-    $sliderli = $('#slider li'),
-    $nbrli = $sliderli.length,
-    nbrliIndex = $nbrli -1,
-    i=0,
-    $currentItem = $('#slider li').eq(i); // le i étant réinit à 0 ci-dessus, la première image est à index 0
+ 
+var sliderModule = new BigSlider();
+var newsModule = new NewsModule();
+sliderModule.sliderFade();
 
-    console.log('Nombre de li/image: ' + $nbrli);
-    console.log('Nombre de li/Index: ' + nbrliIndex);
-
-    $.each($sliderli, function() {
-        $("<span id='dot" + (i+1) + "' class='dots'></span>").appendTo(".nav");
-        i++;
-    });
+var parentDiv;
 
 
-    $sliderli.addClass('fadeout').removeClass('fadein');
-    $currentItem.addClass('fadein').removeClass('fadeout');
-    console.log('Item courrant: ' + $currentItem);
-        
+    $('.dots').on('click',function(){
 
-
-    // Navigation dots
-    $('.dots').click(function(){
+        /*sliderModule.navDot();*/
 
         var numDot = $(this).attr( "id" );
-        /*console.log(numDot);*/
         var elem = numDot.split('dot');
         i= elem[1];
         i= i - 1 ;
 
-        /*i = 0;*/
-         $sliderli.addClass("fadeout").removeClass("fadein");
-        $currentItem = $sliderli.eq(i);
-        $currentItem.addClass("fadein").removeClass("fadeout");
+        /*$('.dots').removeClass("dotsactive");
+        $(this).addClass("dotsactive");*/
+
+
+         sliderModule.sliderli.addClass("fadeout").removeClass("fadein");
+         sliderModule.currentItem = sliderModule.sliderli.eq(i);
+         sliderModule.currentItem.addClass("fadein").removeClass("fadeout");
+
+
 
     });
 
 
-    $('.next').click(function(){ 
-        i++; // incrémente le compteur
-        $sliderli.addClass("fadeout").removeClass("fadein"); // on cache les images
-
-        if( i > nbrliIndex ){
-            i = 0;
-        }
-
-        $currentItem = $sliderli.eq(i); // on définit la nouvelle image
-        $currentItem.addClass("fadein").removeClass("fadeout"); // puis on l'affiche
-
+    $('.next').on('click',function(){ 
+        
+            sliderModule.next();
     });   
 
 
-    $('.prev').click(function(){
+    $('.prev').on('click',function(){
+            sliderModule.prev();
 
-        i--; // Décrémente le compteur
-        $sliderli.addClass("fadeout").removeClass("fadein");
+    });
 
-        if( i < 0 ){
-
-            i = nbrliIndex;
-        }
-
-        $currentItem = $sliderli.eq(i);
-        $currentItem.addClass("fadein").removeClass("fadeout");
-    }); 
-
-
-
-    function sliderFade(){
-        setTimeout(function(){
-
-            if(i < nbrliIndex){ // si le compteur est inférieur au dernier index
-            i++; // on l'incrémente
-            }
-            else{ // sinon, on le remet à 0 (première image)
-                i = 0;
-            }
-
-        $sliderli.addClass("fadeout").removeClass("fadein");
-
-        $currentItem = $sliderli.eq(i);
-        $currentItem.addClass("fadein").removeClass("fadeout");
-
-
-        sliderFade();
-
-        }, 3000);
-    };  // fin SLIDER
-
-sliderFade();
 
 
 /* AJAX ADD IMAGES */
 
-    $(".add-image").click(function() {
-
-        var items = [];
-
+    $('body').on('click','.add-image', function() {
 
         $.ajax({
             url : 'http://demo0474378.mockable.io/testCecile',
             type : 'GET',
             dataType: 'JSON',
             success : function(data, statut){ 
-
-
-                var url1 = data.image1,
-                    url2 = data.image2,
-                    url3 = data.image3;
-
-                $("<li class=\"fadeout\" ><img src='" + url1 + "' /></li>").appendTo("#slider ul");
-                $("<li class=\"fadeout\"><img src='" + url2 + "' /></li>").appendTo("#slider ul");
-                $("<li class=\"fadeout\"><img src='" + url3 + "' /></li>").appendTo("#slider ul");
-                /*console.log('Call Ajax success');*/
-
-            },// Fin success
+                sliderModule.ajaxSuccess(data, statut);
+            },
                
             error : function(resultat, statut, erreur){
-                $('<span> > Une erreur s\'est produite</span>').appendTo(".add-image");
-                alert('Erreur Call Ajax');
-
+                sliderModule.ajaxError(resultat, statut, erreur);
             }
 
         }); //FIN Ajax call
 
     });//FIN ADD IMAGES
 
-});//Fin chargement JQuery
+
+/* NEWS */
+
+    //Ajouter des news
+    $('body').on('click','#add-article', function(){
+        
+        newsModule.addNews();
+
+        return false;
+    });
+
+    //Modifier des news
+    $('body').on('click','.modify-article', function(){
+        
+        newsModule.getNewsValeurs.call(this);
+        newsModule.modifyNews.call(this);
+
+        return false;
+    });
+
+    //Valider la modif des news
+    $('body').on('click','.save-modarticle', function(){
+
+        newsModule.getNewsValues.call(this);
+        newsModule.newsSave.call(this);
+
+        return false;
+    });
+
+    //Annuler la modif des news
+    $('body').on('click','.cancel-modarticle', function(){
+
+        newsModule.newsNoModify.call(this);
+
+        return false;
+    });
+
+    //Supprimer une news
+    $('body').on('click','.delete-article', function(){
+        
+        //newsModule.getNewsValeurs.call(this);
+        parentDiv = $(this).closest('article.news');
+        //console.log(parentDiv);
 
 
+    });
+
+
+    // Fermer la modale sans supprimer l'article
+
+    $('body').on('click','.close-mymodal', function(){
+
+        $('#myModal').foundation('reveal', 'close');
+
+        return false;
+    });
+
+
+        // Fermer la modale en supprimant l'article
+
+    $('body').on('click','.yesdelete-article', function(){
+
+        parentDiv.remove();
+        $('#myModal').foundation('reveal', 'close');
+        
+        
+    });
+
+
+});/////////////////////Fin chargement JQuery
+
+
+
+
+
+
+////////////////// Commentaires apprentissage
 
 //Automatisation s'il n'y avait que des images
                /*$.each( data, function( key, val ) {

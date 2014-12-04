@@ -40,42 +40,73 @@
 
     <div class="row"><!--ROW ADD NEW ARTICLE-->
         <div class=" small-12 columns margtop">
-          <div class="wrap">
-          <div class="position newimage"></div>
-            <p class="title">Ajouter une news</p>
+          <section class="add-news wrap">
+            <p class="title">Ajouter un article</p>
             <form>
               <div class="row">
                 <div class="large-4 columns">
                   <label>Titre de l'article
-                    <input type="text" placeholder="" />
+                    <input type="text" class="new-title" placeholder="" />
                   </label>
                 </div>
               </div>
-
               <div class="row">
                 <div class="large-8 columns">
                   <label>Votre article
-                    <textarea type="text" placeholder="" ></textarea> 
+                    <textarea type="text" class="new-content" placeholder="" ></textarea> 
                   </label>
                 </div>
               </div>
-              <button class="button" id="addarticle" >Ajouter l'article</button>
+              <button class="button" id="add-article" >Ajouter l'article</button>
             </form>
-          </div>
+          </section>
         </div>
       </div><!--END ROW ADD NEW ARTICLE-->
+
       <div class="row"><!--ROW ALL ARTICLES-->
-        <div class=" small-12 columns margtop news-container">
-          <div class="wrap news ">
-            <h2 class="title">Titre News</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias praesentium quo, sunt numquam optio dignissimos explicabo delectus dolore earum nobis quae recusandae quidem labore voluptas! Voluptate vero commodi, provident aspernatur.
-            </p>
-          </div>
+        <div class=" small-12 columns margtop">
+          <section class="wrap" id="news-container">
+            <article class="news">
+              <h2 class="news-title">Titre article</h2>
+              <div class="news-content news1">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias praesentium quo, sunt numquam optio dignissimos explicabo delectus dolore earum nobis quae recusandae quidem labore voluptas! Voluptate vero commodi, provident aspernatur.
+                </p>
+              </div>
+            <button class="button tiny modify-article" >Modifier l'article</button>
+            <button class="button tiny delete-article" data-reveal-id="myModal">Supprimer l'article</button>
+            </article>
+            <article class="news ">
+              <h2 class="news-title">Titre article</h2>
+              <div class="news-content">
+                <p>content</p>
+              </div>
+                <button class="button tiny modify-article" >Modifier l'article</button>
+                <button class="button tiny delete-article" data-reveal-id="myModal" >Supprimer l'article</button>
+            </article>
+          </section>
         </div>
       </div><!--END ROW ALL ARTICLES-->
 
+      <div class="row"><!--ROW Footer-->
+        <div class=" small-12 columns margtop news-container">
+          <div class="wrap footer ">
+            <p>Footer</p>
+          </div>
+        </div>
+      </div><!--END ROW FOOTER-->
+
+  <div id="myModal" class="reveal-modal small" data-reveal>
+  <p class="modal-text">Sérieux...tu veux supprimer ce sublime article ?</p>
+  <button class="button tiny yesdelete-article" >Oui, supprimer l'article</button>
+  <button class="button close-mymodal" >Non ! Garder l'article</button>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/foundation/js/foundation.min.js"></script>
+    <script src="js/bigslider.js"></script>
+    <script src="js/newsmodule.js"></script>
     <script src="js/app.js"></script>
+
   </body>
 </html>
