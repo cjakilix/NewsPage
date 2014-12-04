@@ -90,8 +90,8 @@ var NewsModule = function(){
     };
 
 
-    function newsNoModify (){
-        parentDiv = $(this).parents('article.news');
+    function newsNoModify (that){
+        parentDiv = $(that).parents('article.news');
         parentDiv.removeClass('modify-news');
         parentDiv.children().remove();
 
@@ -104,8 +104,8 @@ var NewsModule = function(){
     };        
 
 
-    function getNewsValues (){
-        parentDiv = $(this).parents('article.news');
+    function getNewsValues (thut){
+        parentDiv = $(thut).parents('article.news');
         newsTitleValue = parentDiv.find('.new-title').val();
         newsContentValue = parentDiv.find('.new-content').val();
        

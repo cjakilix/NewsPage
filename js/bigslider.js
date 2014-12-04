@@ -17,13 +17,15 @@ var BigSlider = function(){
         i=0;
         currentItem = $('#slider li').eq(i);
 
-
         
-        $( ".dots" ).remove();
+        $('.dots').remove();
         $.each(sliderli, function() {
-            $("<span id='dot" + (i+1) + "' class='dots'></span>").appendTo(".nav");
+            $('<span id="dot'+(i+1)+'"class="dots haha"></span>').appendTo('.nav');
             i++;
+
+            console.log('test each');
         });
+
     };
 
     updateValues();
@@ -60,8 +62,14 @@ var BigSlider = function(){
     };
 
 
-    function navDot(){
-    // A faire pour automatisation des dots
+    function navDot(that){
+        i = $(that).index();
+
+        console.log(i);
+
+         sliderli.addClass("fadeout").removeClass("fadein");
+         currentItem = sliderli.eq(i);
+         currentItem.addClass("fadein").removeClass("fadeout");
     };
 
    
@@ -75,24 +83,15 @@ var BigSlider = function(){
     };
 
 
-    function ajaxSuccess (data, statut){
-                var url1 = data.image1,
-                    url2 = data.image2,
-                    url3 = data.image3;
-
-                $("<li class=\"fadeout\" ><img src='" + url1 + "' /></li>").appendTo("#slider ul");
-                $("<li class=\"fadeout\"><img src='" + url2 + "' /></li>").appendTo("#slider ul");
-                $("<li class=\"fadeout\"><img src='" + url3 + "' /></li>").appendTo("#slider ul");
-                console.log('Call Ajax success');
-
-                updateValues();
+    /*function ajaxSuccess (data, statut){
+                
     };
 
 
     function ajaxError (resultat, statut, erreur){
         $('<span> > Une erreur s\'est produite</span>').appendTo(".add-image");
         console.log('Erreur Call Ajax');
-    };   
+    };   */
 
 
     return {
@@ -103,9 +102,8 @@ var BigSlider = function(){
         nbrli : nbrli,
         sliderli : sliderli,
         currentItem : currentItem,
-        updateValues : updateValues,
-        ajaxSuccess : ajaxSuccess,
-        ajaxError : ajaxError
+        updateValues : updateValues
+
     }
 
 
