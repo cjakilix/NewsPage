@@ -5,6 +5,10 @@ var NewsModule = function(){
         var newsTitleValue;
         var newsContentValue;
 
+        var newsTitleNoChange;
+        var NewsContentNoChange;
+
+
     function addNews(){
         
         var newsTitle = $('.add-news .new-title').val(),
@@ -37,13 +41,15 @@ var NewsModule = function(){
 
     function getNewsValeurs (){
 
-            parentDiv = $(this).closest('article.news');
+            parentDiv = $(this).parents('article.news');
+
         var modButton = $(this),
             suppButton = parentDiv.children('button.delete-article'),
             newsTitleContainer = parentDiv.children('.news-title'),//Selectionne tout le h2 et pas le texte
             newsContentContainer = parentDiv.children('.news-content');
             newsTitle = newsTitleContainer.text(),
             newsContent = newsContentContainer.text();
+
     };
 
 
@@ -51,13 +57,6 @@ var NewsModule = function(){
 
     function modifyNews (){
 
-            /*parentDiv = $(this).closest('article.news');
-        var modButton = $(this),
-            suppButton = parentDiv.children('button.delete-article'),
-            newsTitleContainer = parentDiv.children('.news-title'),//Selectionne tout le h2 et pas le texte
-            newsContentContainer = parentDiv.children('.news-content');
-            newsTitle = newsTitleContainer.text(),
-            newsContent = newsContentContainer.text();*/
 
         
         parentDiv.addClass('modify-news');
@@ -92,10 +91,11 @@ var NewsModule = function(){
 
 
     function newsNoModify (){
+        parentDiv = $(this).parents('article.news');
         parentDiv.removeClass('modify-news');
         parentDiv.children().remove();
 
-        //A factoriser avec le addnews (faire une variable ?)
+        //A factoriser avec le addnews (faire une fonction ?)
         $('<h2 class="news-title">'+ newsTitle +'</h2>'+
             '<div class="news-content"><p>'+ newsContent + '</p></div>'+
             '<button class="button tiny modify-article">Modifier l\'article</button>'+
@@ -105,14 +105,9 @@ var NewsModule = function(){
 
 
     function getNewsValues (){
-        parentDiv = $(this).closest('article.news');
+        parentDiv = $(this).parents('article.news');
         newsTitleValue = parentDiv.find('.new-title').val();
         newsContentValue = parentDiv.find('.new-content').val();
-
-        /*console.log('Get modif ok');
-        console.log(parentDiv);
-        console.log(newsTitle);
-        console.log(newsContent);*/
        
     };
 
@@ -137,16 +132,6 @@ var NewsModule = function(){
         }
     };
 
-    /*function callTest (){
-
-
-
-        console.log(newsTitleValue + ' :CallTest newsTitleValue');
-        console.log(newsContentValue + ' :CallTest newsContentValue');
-        console.log(newsTitle + ' :CallTest TitleValue');
-        console.log(newsContent + ' :CallTest ContentValue');
-       
-    };*/
 
 
     return {

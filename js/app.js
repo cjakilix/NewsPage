@@ -80,6 +80,7 @@ var parentDiv;
     //Modifier des news
     $('body').on('click','.modify-article', function(){
         
+
         newsModule.getNewsValeurs.call(this);
         newsModule.modifyNews.call(this);
 
@@ -88,6 +89,7 @@ var parentDiv;
 
     //Valider la modif des news
     $('body').on('click','.save-modarticle', function(){
+
 
         newsModule.getNewsValues.call(this);
         newsModule.newsSave.call(this);
@@ -107,7 +109,7 @@ var parentDiv;
     $('body').on('click','.delete-article', function(){
         
         //newsModule.getNewsValeurs.call(this);
-        parentDiv = $(this).closest('article.news');
+        parentDiv = $(this).parents('article.news');
         //console.log(parentDiv);
 
 
@@ -120,16 +122,15 @@ var parentDiv;
 
         $('#myModal').foundation('reveal', 'close');
 
-        return false;
     });
 
 
-        // Fermer la modale en supprimant l'article
+    // Fermer la modale en supprimant l'article
 
     $('body').on('click','.yesdelete-article', function(){
 
         parentDiv.remove();
-        $('#myModal').foundation('reveal', 'close');
+        //$('#myModal').foundation('reveal', 'close');
         
         
     });
