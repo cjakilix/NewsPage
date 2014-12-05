@@ -8,7 +8,14 @@ var BigSlider = function(){
     var nbrli;
     var nbrliIndex;
     var i;
-        
+    var InteralvId;
+
+    updateValues();
+
+
+    sliderli.addClass('fadeout').removeClass('fadein');
+    currentItem.addClass('fadein').removeClass('fadeout');
+
 
     function updateValues(){
         sliderli = $('#slider li');
@@ -23,86 +30,96 @@ var BigSlider = function(){
             $('<span id="dot'+(i+1)+'"class="dots haha"></span>').appendTo('.nav');
             i++;
 
-            console.log('test each');
+            //console.log('updatesValues / Each Dots auto');
         });
 
     };
 
-    updateValues();
+
+    function sliderFade() {
+      InteralvId = setInterval(next, 3000);
+      //console.log('start sliderFade');
+    };
 
 
-	sliderli.addClass('fadeout').removeClass('fadein');
-	currentItem.addClass('fadein').removeClass('fadeout');
+    function stopSliderFade() {
+     clearInterval(InteralvId);
+     //console.log('stop sliderFade');
+    };
 
+
+    function autoStopSlider () {
+
+        $('#slider').hover(stopSliderFade, sliderFade);
+    
+    };
+
+
+    function clickNext (){
+
+        $('body').on('click','.next', function(){ 
+        
+            next();
+        });
+    };
 
 
     function next(){
-        i++; // incrémente le compteur
-        sliderli.addClass("fadeout").removeClass("fadein"); // on cache les images
+        i++;
+        sliderli.addClass('fadeout').removeClass('fadein'); 
 
         if( i > nbrliIndex ){
             i = 0;
         }
 
-        currentItem = sliderli.eq(i); // on définit la nouvelle image
-        currentItem.addClass("fadein").removeClass("fadeout"); // puis on l'affiche
+        currentItem = sliderli.eq(i); 
+        currentItem.addClass('fadein').removeClass('fadeout'); 
     };
 
-    function prev(){
-        i--; // Décrémente le compteur
-        sliderli.addClass("fadeout").removeClass("fadein");
 
-        if( i < 0 ){
-            i = nbrliIndex;
-        }
 
-        currentItem = sliderli.eq(i);
-        currentItem.addClass("fadein").removeClass("fadeout");
+    function clickPrev (){
+
+        $('body').on('click','.prev', function(){ 
         
+            i--; 
+            sliderli.addClass('fadeout').removeClass('fadein');
+
+            if( i < 0 ){
+                i = nbrliIndex;
+            }
+
+            currentItem = sliderli.eq(i);
+            currentItem.addClass('fadein').removeClass('fadeout');
+        });
     };
 
 
-    function navDot(that){
-        i = $(that).index();
+    function clickDots(){
 
-        console.log(i);
+        $('body').on('click','.dots', function(){
 
-         sliderli.addClass("fadeout").removeClass("fadein");
-         currentItem = sliderli.eq(i);
-         currentItem.addClass("fadein").removeClass("fadeout");
+            i = $(this).index();
+
+            //console.log(i);
+
+             sliderli.addClass('fadeout').removeClass('fadein');
+             currentItem = sliderli.eq(i);
+             currentItem.addClass('fadein').removeClass('fadeout');
+        });
     };
 
-   
-    function sliderFade(){
-        setTimeout(function(){
-
-        next();
-        sliderFade();
-
-        }, 3000);
-    };
-
-
-    /*function ajaxSuccess (data, statut){
-                
-    };
-
-
-    function ajaxError (resultat, statut, erreur){
-        $('<span> > Une erreur s\'est produite</span>').appendTo(".add-image");
-        console.log('Erreur Call Ajax');
-    };   */
-
+    
 
     return {
-        next: next,
-        prev : prev,
-        navDot : navDot,
+        updateValues : updateValues,
         sliderFade : sliderFade,
-        nbrli : nbrli,
-        sliderli : sliderli,
-        currentItem : currentItem,
-        updateValues : updateValues
+        stopSliderFade : stopSliderFade,
+        autoStopSlider : autoStopSlider,
+        clickNext : clickNext,
+        next: next,
+        clickPrev : clickPrev,
+        clickDots : clickDots
 
     }
 

@@ -5,25 +5,26 @@ var NewsModule = function(){
         var newsTitleValue;
         var newsContentValue;
 
-        var newsTitleNoChange;
-        var NewsContentNoChange;
 
 
     function addNews(){
-        
-        var newsTitle = $('.add-news .new-title').val(),
-            newsContent = $('.add-news .new-content').val();
 
-            //console.log(newsTitle + ' ' + newsContent + ' Ajouté aux articles');
+        $('body').on('click','#add-article', function(){
+
+
+            
+            var newsTitle = $('.add-news .new-title').val(),
+                newsContent = $('.add-news .new-content').val();
+
 
             $('section.add-news p.redalert').remove();
 
 
             newsTitle ? true : false;
-            newsContent ? true : false;
+             newsContent ? true : false;
 
             if(newsTitle && newsContent){
-                
+                    
                 $('#news-container').prepend('<article class="news">'+
                     '<h2 class="news-title">'+ newsTitle +'</h2>'+
                     '<div class="news-content"><p>'+ newsContent + '</p></div>'+
@@ -33,15 +34,19 @@ var NewsModule = function(){
                 $('#add-article').before('<p class="redalert">Vous devez remplir le titre et le contenu de l\'article.</p>')
 
             };
+
+            return false;
+        });  
+
     };
 
 
 
 
 
-    function getNewsValeurs (){
+    function getNewsValeurs (that){
 
-            parentDiv = $(this).parents('article.news');
+            parentDiv = $(that).parents('article.news');
 
         var modButton = $(this),
             suppButton = parentDiv.children('button.delete-article'),
@@ -55,9 +60,9 @@ var NewsModule = function(){
 
 
 
-    function modifyNews (){
+    function modifyNews (thut){
 
-
+        var parentDiv = $(thut).parents('article.news');
         
         parentDiv.addClass('modify-news');
         parentDiv.children().remove();
@@ -80,13 +85,6 @@ var NewsModule = function(){
               '<button class="button tiny save-modarticle" >Enregistrer</button>'+
               '<button class="button tiny cancel-modarticle" >Annuler</button>'+
             '</form>').appendTo(parentDiv);
-        
-
-        //newsTitle.appendTo(parentDiv);
-
-        //console.log(newsTitle);
-        //console.log(newsContent);
-
     };
 
 
@@ -112,7 +110,10 @@ var NewsModule = function(){
     };
 
 
-    function newsSave (){
+    function newsSave (thot){
+
+        parentDiv = $(thot).parents('article.news');
+
         newsTitleValue ? true : false;
         newsContentValue ? true : false;
         
@@ -127,7 +128,7 @@ var NewsModule = function(){
             '<button class="button tiny delete-article" data-reveal-id="myModal" >Supprimer l\'article</button>')
             .appendTo(parentDiv);
         }else{
-            $(this).before('<p class="redalert">Vous devez remplir le titre et le contenu de l\'article.</p>')
+            $(thot).before('<p class="redalert">Vous devez remplir le titre et le contenu de l\'article.</p>')
             
         }
     };

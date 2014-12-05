@@ -6,32 +6,22 @@ jQuery(function($){
  
 var sliderModule = new BigSlider();
 var newsModule = new NewsModule();
-sliderModule.sliderFade();
 
 var parentDiv;
 
 
-    $('body').on('click','.dots', function(){
+sliderModule.sliderFade();
+sliderModule.clickDots();
+sliderModule.clickNext();
+sliderModule.clickPrev();
+sliderModule.autoStopSlider();
 
-        sliderModule.navDot(this);
-
-    });
-
-
-    $('body').on('click','.next', function(){ 
-        
-            sliderModule.next();
-    });   
-
-
-    $('body').on('click','.prev', function(){
-            sliderModule.prev();
-
-    });
-
+newsModule.addNews();
 
 
 $('body').on('click','.add-image', function() {
+
+        //FAIRE UN MODULE AJAX
 
         $.ajax({
             url : 'http://demo0474378.mockable.io/testCecile',
@@ -62,20 +52,12 @@ $('body').on('click','.add-image', function() {
 
 /* NEWS */
 
-    //Ajouter des news
-    $('body').on('click','#add-article', function(){
-        
-        newsModule.addNews();
-
-        return false;
-    });
-
     //Modifier des news
     $('body').on('click','.modify-article', function(){
         
 
-        newsModule.getNewsValeurs.call(this);
-        newsModule.modifyNews.call(this);
+        newsModule.getNewsValeurs(this);
+        newsModule.modifyNews(this);
 
         return false;
     });
@@ -85,7 +67,7 @@ $('body').on('click','.add-image', function() {
 
 
         newsModule.getNewsValues(this);
-        newsModule.newsSave.call(this);
+        newsModule.newsSave(this);
 
         return false;
     });
@@ -94,7 +76,6 @@ $('body').on('click','.add-image', function() {
     $('body').on('click','.cancel-modarticle', function(){
 
         newsModule.newsNoModify(this);
-        //newsModule.newsNoModify();
 
         return false;
     });
@@ -130,26 +111,3 @@ $('body').on('click','.add-image', function() {
 
 });/////////////////////Fin chargement JQuery
 
-
-
-
-
-
-////////////////// Commentaires apprentissage
-
-//Automatisation s'il n'y avait que des images
-               /*$.each( data, function( key, val ) {
-                $("<img src='" + val + "' />" ).appendTo("#slider").addClass('fadeout'); //"<li id='" + key + "' ><img src='" + val + "' /></li>"
-            });*/
-                //Ajouter le nombre de dots en fontion du nombre de data
-                /*$.each( data, function( key, val ) {
-                $("<span></span>").appendTo(".nav").addClass('dots'); //"<li id='" + key + "' ><img src='" + val + "' /></li>"
-            });*/
-
-
-                // En passant par un tableau
-
-               /*$.each( data, function( key, val ) {
-                items.push( "<img src='" + val + "' />" ); //"<li id='" + key + "' ><img src='" + val + "' /></li>"
-            });
-               */
