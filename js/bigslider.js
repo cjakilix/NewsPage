@@ -8,7 +8,14 @@ var BigSlider = function(){
     var nbrli;
     var nbrliIndex;
     var i;
-        
+    var InteralvId;
+
+    updateValues();
+
+
+    sliderli.addClass('fadeout').removeClass('fadein');
+    currentItem.addClass('fadein').removeClass('fadeout');
+
 
     function updateValues(){
         sliderli = $('#slider li');
@@ -17,95 +24,103 @@ var BigSlider = function(){
         i=0;
         currentItem = $('#slider li').eq(i);
 
-
         
-        $( ".dots" ).remove();
+        $('.dots').remove();
         $.each(sliderli, function() {
-            $("<span id='dot" + (i+1) + "' class='dots'></span>").appendTo(".nav");
+            $('<span id="dot'+(i+1)+'"class="dots haha"></span>').appendTo('.nav');
             i++;
+
+            //console.log('updatesValues / Each Dots auto');
+        });
+
+    };
+
+
+    function sliderFade() {
+      InteralvId = setInterval(next, 3000);
+      //console.log('start sliderFade');
+    };
+
+
+    function stopSliderFade() {
+     clearInterval(InteralvId);
+     //console.log('stop sliderFade');
+    };
+
+
+    function autoStopSlider () {
+
+        $('#slider').hover(stopSliderFade, sliderFade);
+    
+    };
+
+
+    function clickNext (){
+
+        $('body').on('click','.next', function(){ 
+        
+            next();
         });
     };
 
-    updateValues();
-
-
-	sliderli.addClass('fadeout').removeClass('fadein');
-	currentItem.addClass('fadein').removeClass('fadeout');
-
-
 
     function next(){
-        i++; // incrémente le compteur
-        sliderli.addClass("fadeout").removeClass("fadein"); // on cache les images
+        i++;
+        sliderli.addClass('fadeout').removeClass('fadein'); 
 
         if( i > nbrliIndex ){
             i = 0;
         }
 
-        currentItem = sliderli.eq(i); // on définit la nouvelle image
-        currentItem.addClass("fadein").removeClass("fadeout"); // puis on l'affiche
+        currentItem = sliderli.eq(i); 
+        currentItem.addClass('fadein').removeClass('fadeout'); 
     };
 
-    function prev(){
-        i--; // Décrémente le compteur
-        sliderli.addClass("fadeout").removeClass("fadein");
 
-        if( i < 0 ){
-            i = nbrliIndex;
-        }
 
-        currentItem = sliderli.eq(i);
-        currentItem.addClass("fadein").removeClass("fadeout");
+    function clickPrev (){
+
+        $('body').on('click','.prev', function(){ 
         
+            i--; 
+            sliderli.addClass('fadeout').removeClass('fadein');
+
+            if( i < 0 ){
+                i = nbrliIndex;
+            }
+
+            currentItem = sliderli.eq(i);
+            currentItem.addClass('fadein').removeClass('fadeout');
+        });
     };
 
 
-    function navDot(){
-    // A faire pour automatisation des dots
+    function clickDots(){
+
+        $('body').on('click','.dots', function(){
+
+            i = $(this).index();
+
+            //console.log(i);
+
+             sliderli.addClass('fadeout').removeClass('fadein');
+             currentItem = sliderli.eq(i);
+             currentItem.addClass('fadein').removeClass('fadeout');
+        });
     };
 
-   
-    function sliderFade(){
-        setTimeout(function(){
-
-        next();
-        sliderFade();
-
-        }, 3000);
-    };
-
-
-    function ajaxSuccess (data, statut){
-                var url1 = data.image1,
-                    url2 = data.image2,
-                    url3 = data.image3;
-
-                $("<li class=\"fadeout\" ><img src='" + url1 + "' /></li>").appendTo("#slider ul");
-                $("<li class=\"fadeout\"><img src='" + url2 + "' /></li>").appendTo("#slider ul");
-                $("<li class=\"fadeout\"><img src='" + url3 + "' /></li>").appendTo("#slider ul");
-                console.log('Call Ajax success');
-
-                updateValues();
-    };
-
-
-    function ajaxError (resultat, statut, erreur){
-        $('<span> > Une erreur s\'est produite</span>').appendTo(".add-image");
-        console.log('Erreur Call Ajax');
-    };   
-
+    
 
     return {
-        next: next,
-        prev : prev,
-        navDot : navDot,
-        sliderFade : sliderFade,
-        nbrli : nbrli,
-        sliderli : sliderli,
-        currentItem : currentItem,
         updateValues : updateValues,
-        ajaxSuccess : ajaxSuccess,
-        ajaxError : ajaxError
+        sliderFade : sliderFade,
+        stopSliderFade : stopSliderFade,
+        autoStopSlider : autoStopSlider,
+        clickNext : clickNext,
+        next: next,
+        clickPrev : clickPrev,
+        clickDots : clickDots
+
     }
 
 

@@ -1,106 +1,109 @@
 <!doctype html>
 <html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
+
+<head>
+  	<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ma page de news</title>
     <link rel="stylesheet" href="css/app.css" />
     <script src="bower_components/modernizr/modernizr.js"></script>
-  </head>
-  <body>
-    <div class="row">
-      <div class="large-12 columns">
-        <h1>Mes news</h1>
-      </div>
+</head>
+
+<body>
+ 	<div class="row">
+		<div class="large-12 columns">
+        	<h1>Mes news</h1>
+    	</div>
     </div>
 
     <div class="row">
-      <div class="large-12 columns">
-          <div id="slider">
-              <ul>
-                <li><img src="http://placehold.it/970x450/EFAD6B/ffffff&text=Slideshow1" alt=""></li>
-                <li><img src="http://placehold.it/970x450&text=Slideshow2" alt=""></li>
-                <li><img src="http://placehold.it/970x450&text=Slideshow3" alt=""></li>
-                <li><img src="http://placehold.it/970x450&text=Slideshow4" alt=""></li>
-              </ul> 
-              <div class="controls">
-                <span class="prev">&lt;</span>
-                <span class="next">&gt;</span>
-              </div>
-              <div class="nav">
-                <!-- <span id="dot1" class="dots"></span>
-                <span id="dot2" class="dots"></span>
-                <span id="dot3" class="dots"></span>
-                <span id="dot4" class="dots"></span> -->
-              </div>  
-          </div>
-          <div role="button" tabindex="0" class="button add-image">Ajouter 3 images</div>
-      </div>
+    	<div class="large-12 columns">
+        	<div id="slider">
+            	<ul>
+	                <li><img src="http://placehold.it/970x450/EFAD6B/ffffff&text=Slideshow1" alt=""></li>
+	                <li><img src="http://placehold.it/970x450&text=Slideshow2" alt=""></li>
+	                <li><img src="http://placehold.it/970x450&text=Slideshow3" alt=""></li>
+	                <li><img src="http://placehold.it/970x450&text=Slideshow4" alt=""></li>
+             	</ul> 
+              	<div class="controls">
+                	<span class="prev">&lt;</span>
+                	<span class="next">&gt;</span>
+              	</div>
+              	<div class="nav">
+	                <!-- <span id="dot1" class="dots"></span>
+	                <span id="dot2" class="dots"></span>
+	                <span id="dot3" class="dots"></span>
+	                <span id="dot4" class="dots"></span> -->
+              	</div>  
+          </div><!-- End #Slider -->
+          <button role="button" tabindex="0" class="button add-image">Ajouter 3 images </button>
+      	</div>
     </div>
 
     <div class="row"><!--ROW ADD NEW ARTICLE-->
         <div class=" small-12 columns margtop">
-          <section class="add-news wrap">
-            <p class="title">Ajouter un article</p>
-            <form>
-              <div class="row">
-                <div class="large-4 columns">
-                  <label>Titre de l'article
-                    <input type="text" class="new-title" placeholder="" />
-                  </label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="large-8 columns">
-                  <label>Votre article
-                    <textarea type="text" class="new-content" placeholder="" ></textarea> 
-                  </label>
-                </div>
-              </div>
-              <button class="button" id="add-article" >Ajouter l'article</button>
-            </form>
-          </section>
+          	<section class="add-news wrap">
+	            <p class="title">Ajouter un article</p>
+	            <form>
+	              	<div class="row">
+		                <div class="large-4 columns">
+		                  	<label>Titre de l'article
+		                    	<input type="text" class="new-title" placeholder="" />
+		                  	</label>
+		                </div>
+	              	</div>
+		            <div class="row">
+		                <div class="large-8 columns">
+		                  	<label>Votre article
+		                    	<textarea type="text" class="new-content" placeholder="" ></textarea> 
+		                  </label>
+		                </div>
+		            </div>
+	              	<button class="button" id="add-article" >Ajouter l'article</button>
+	            </form>
+          	</section>
         </div>
-      </div><!--END ROW ADD NEW ARTICLE-->
+    </div><!--END ROW ADD NEW ARTICLE-->
 
-      <div class="row"><!--ROW ALL ARTICLES-->
+    <div class="row"><!--ROW ALL ARTICLES-->
         <div class=" small-12 columns margtop">
-          <section class="wrap" id="news-container">
-            <article class="news">
-              <h2 class="news-title">Titre article</h2>
-              <div class="news-content news1">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias praesentium quo, sunt numquam optio dignissimos explicabo delectus dolore earum nobis quae recusandae quidem labore voluptas! Voluptate vero commodi, provident aspernatur.
-                </p>
-              </div>
-            <button class="button tiny modify-article" >Modifier l'article</button>
-            <button class="button tiny delete-article" data-reveal-id="myModal">Supprimer l'article</button>
-            </article>
-            <article class="news ">
-              <h2 class="news-title">Titre article</h2>
-              <div class="news-content">
-                <p>content</p>
-              </div>
-                <button class="button tiny modify-article" >Modifier l'article</button>
-                <button class="button tiny delete-article" data-reveal-id="myModal" >Supprimer l'article</button>
-            </article>
-          </section>
+          	<section class="wrap" id="news-container">
+            	<article class="news">
+              		<h2 class="news-title">Titre article</h2>
+              		<div class="news-content">
+		                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias praesentium quo, sunt numquam optio dignissimos explicabo delectus dolore earum nobis quae recusandae quidem labore voluptas! Voluptate vero commodi, provident aspernatur.
+		                </p>
+              		</div>
+            		<button class="button tiny modify-article" >Modifier l'article</button>
+            		<button class="button tiny delete-article" data-reveal-id="myModal">Supprimer l'article</button>
+            	</article>
+            	<article class="news ">
+	              	<h2 class="news-title">Titre article</h2>
+	              	<div class="news-content">
+	                	<p>content</p>
+	              	</div>
+	                <button class="button tiny modify-article" >Modifier l'article</button>
+	                <button class="button tiny delete-article" data-reveal-id="myModal" >Supprimer l'article</button>
+            	</article>
+          	</section>
         </div>
-      </div><!--END ROW ALL ARTICLES-->
+    </div><!--END ROW ALL ARTICLES-->
 
-      <div class="row"><!--ROW Footer-->
+    <div class="row"><!--ROW Footer-->
         <div class=" small-12 columns margtop news-container">
-          <div class="wrap footer ">
-            <p>Footer</p>
-          </div>
+          	<div class="wrap footer ">
+            	<p>Footer</p>
+          	</div>
         </div>
-      </div><!--END ROW FOOTER-->
+    </div><!--END ROW FOOTER-->
 
-  <div id="myModal" class="reveal-modal small" data-reveal>
-  <p class="modal-text">Sérieux...tu veux supprimer ce sublime article ?</p>
-  <button class="button tiny yesdelete-article" >Oui, supprimer l'article</button>
-  <button class="button close-mymodal" >Non ! Garder l'article</button>
-  <a class="close-reveal-modal">&#215;</a>
-</div>
+    <!--DELETE ARTICLE MODAL-->
+    <div id="myModal" class="reveal-modal small" data-reveal>
+	    <p class="modal-text">Sérieux...tu veux supprimer ce sublime article ?</p>
+	    <button class="button tiny yesdelete-article close-mymodal" >Oui, supprimer l'article</button>
+	    <button class="button close-mymodal" >Non ! Garder l'article</button>
+	    <a class="close-reveal-modal">&#215;</a>
+    </div>
 
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/foundation/js/foundation.min.js"></script>
@@ -108,5 +111,5 @@
     <script src="js/newsmodule.js"></script>
     <script src="js/app.js"></script>
 
-  </body>
+</body>
 </html>

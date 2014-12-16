@@ -1,19 +1,13 @@
 /*
-ALL CSS
+GLOBALS
 */
 
-/* TODO : FAIRE MIXIN POUR LA TRANSITION;
 
-/*
-COLORS
-*/
+/** Colors **/
 $light-grey : #f2f2f2; /*Light-grey*/
 $dark-grey : #969696 ; /*Dark-grey*/
 $mid-grey : #CCCCCC;
 
-/*
-GLOBALS
-*/
 
 
 /** Blocs **/
@@ -26,15 +20,14 @@ GLOBALS
 
 .margtop { /*row*/
     margin-top: 20px;
-    font-weight: bold;
 }
-
 
 
 /** Texts **/
 
 h1 {
     color: $dark-grey;
+    font-weight: bold;
     
 }
 
@@ -49,13 +42,35 @@ h1 {
 }
 
 
+/** Button **/
+.modify-article, .save-modarticle {
+    margin-right: 0.5rem;
+}
+
+.add-image {
+    margin-top: 10px;
+}
+
+
+/**inputs**/
+.bord-red {
+    border:1px solid $alert-color; 
+}
+
+/** Transition **/
+@mixin transitionall($time) {
+    -moz-transition: all $time;
+    -webkit-transition: all $time;
+    transition: all $time;
+}
+
 /* SLIDER 2 
 */
 
 #slider {
     position: relative;
     width: 970px;
-    width: 100%;
+    min-width: 100%;
     height: 450px;
     overflow: hidden;
     border: 1px solid $light-grey;
@@ -74,15 +89,27 @@ h1 {
             top: 0;
             left: 0;
 
+            img {
+                width: 100%;
+                height: auto;
+            }
+
         }
     }
 
 }
 
-@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+ @media only screen and (min-width: 40.063em) and (max-width: 64em) {
     #slider {
         width :640px;
         height: 296px;
+    }
+}
+
+@media only screen and (max-width: 40.063em) {
+    #slider {
+        width :300px;
+        height: 140px;
     }
 }
 
@@ -90,18 +117,14 @@ h1 {
 
 .fadeout {
     opacity: 0;
-    -moz-transition: all 300ms;
-    -webkit-transition: all 300ms;
-    transition: all 300ms;
+    @include transitionall(600ms);
 
 
 }
 
 .fadein {
     opacity: 1;
-    -moz-transition: all 300ms;
-    -webkit-transition: all 300ms;
-    transition: all 300ms;
+    @include transitionall(600ms);
        
 }
 
@@ -177,7 +200,5 @@ NEWS
 
 .modify-news {
     background: $mid-grey ;
-    -moz-transition: all 300ms;
-    -webkit-transition: all 300ms;
-    transition: all 300ms;
+    @include transitionall(600ms);
 }

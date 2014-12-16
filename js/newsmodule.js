@@ -5,21 +5,26 @@ var NewsModule = function(){
         var newsTitleValue;
         var newsContentValue;
 
-    function addNews(){
-        
-        var newsTitle = $('.add-news .new-title').val(),
-            newsContent = $('.add-news .new-content').val();
 
-            //console.log(newsTitle + ' ' + newsContent + ' Ajouté aux articles');
+
+    function addNews(){
+
+        $('body').on('click','#add-article', function(){
+
+
+            
+            var newsTitle = $('.add-news .new-title').val(),
+                newsContent = $('.add-news .new-content').val();
+
 
             $('section.add-news p.redalert').remove();
 
 
             newsTitle ? true : false;
-            newsContent ? true : false;
+             newsContent ? true : false;
 
             if(newsTitle && newsContent){
-                
+                    
                 $('#news-container').prepend('<article class="news">'+
                     '<h2 class="news-title">'+ newsTitle +'</h2>'+
                     '<div class="news-content"><p>'+ newsContent + '</p></div>'+
@@ -29,36 +34,35 @@ var NewsModule = function(){
                 $('#add-article').before('<p class="redalert">Vous devez remplir le titre et le contenu de l\'article.</p>')
 
             };
+
+            return false;
+        });  
+
     };
 
 
 
 
 
-    function getNewsValeurs (){
+    function getNewsValeurs (that){
 
-            parentDiv = $(this).closest('article.news');
+            parentDiv = $(that).parents('article.news');
+
         var modButton = $(this),
             suppButton = parentDiv.children('button.delete-article'),
             newsTitleContainer = parentDiv.children('.news-title'),//Selectionne tout le h2 et pas le texte
             newsContentContainer = parentDiv.children('.news-content');
             newsTitle = newsTitleContainer.text(),
             newsContent = newsContentContainer.text();
+
     };
 
 
 
 
-    function modifyNews (){
+    function modifyNews (thut){
 
-            /*parentDiv = $(this).closest('article.news');
-        var modButton = $(this),
-            suppButton = parentDiv.children('button.delete-article'),
-            newsTitleContainer = parentDiv.children('.news-title'),//Selectionne tout le h2 et pas le texte
-            newsContentContainer = parentDiv.children('.news-content');
-            newsTitle = newsTitleContainer.text(),
-            newsContent = newsContentContainer.text();*/
-
+        var parentDiv = $(thut).parents('article.news');
         
         parentDiv.addClass('modify-news');
         parentDiv.children().remove();
@@ -81,21 +85,15 @@ var NewsModule = function(){
               '<button class="button tiny save-modarticle" >Enregistrer</button>'+
               '<button class="button tiny cancel-modarticle" >Annuler</button>'+
             '</form>').appendTo(parentDiv);
-        
-
-        //newsTitle.appendTo(parentDiv);
-
-        //console.log(newsTitle);
-        //console.log(newsContent);
-
     };
 
 
-    function newsNoModify (){
+    function newsNoModify (that){
+        parentDiv = $(that).parents('article.news');
         parentDiv.removeClass('modify-news');
         parentDiv.children().remove();
 
-        //A factoriser avec le addnews (faire une variable ?)
+        //A factoriser avec le addnews (faire une fonction ?)
         $('<h2 class="news-title">'+ newsTitle +'</h2>'+
             '<div class="news-content"><p>'+ newsContent + '</p></div>'+
             '<button class="button tiny modify-article">Modifier l\'article</button>'+
@@ -104,20 +102,18 @@ var NewsModule = function(){
     };        
 
 
-    function getNewsValues (){
-        parentDiv = $(this).closest('article.news');
+    function getNewsValues (thut){
+        parentDiv = $(thut).parents('article.news');
         newsTitleValue = parentDiv.find('.new-title').val();
         newsContentValue = parentDiv.find('.new-content').val();
-
-        /*console.log('Get modif ok');
-        console.log(parentDiv);
-        console.log(newsTitle);
-        console.log(newsContent);*/
        
     };
 
 
-    function newsSave (){
+    function newsSave (thot){
+
+        parentDiv = $(thot).parents('article.news');
+
         newsTitleValue ? true : false;
         newsContentValue ? true : false;
         
@@ -132,21 +128,11 @@ var NewsModule = function(){
             '<button class="button tiny delete-article" data-reveal-id="myModal" >Supprimer l\'article</button>')
             .appendTo(parentDiv);
         }else{
-            $(this).before('<p class="redalert">Vous devez remplir le titre et le contenu de l\'article.</p>')
+            $(thot).before('<p class="redalert">Vous devez remplir le titre et le contenu de l\'article.</p>')
             
         }
     };
 
-    /*function callTest (){
-
-
-
-        console.log(newsTitleValue + ' :CallTest newsTitleValue');
-        console.log(newsContentValue + ' :CallTest newsContentValue');
-        console.log(newsTitle + ' :CallTest TitleValue');
-        console.log(newsContent + ' :CallTest ContentValue');
-       
-    };*/
 
 
     return {

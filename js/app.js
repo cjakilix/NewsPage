@@ -6,60 +6,43 @@ jQuery(function($){
  
 var sliderModule = new BigSlider();
 var newsModule = new NewsModule();
-sliderModule.sliderFade();
 
 var parentDiv;
 
 
-    $('.dots').on('click',function(){
+sliderModule.sliderFade();
+sliderModule.clickDots();
+sliderModule.clickNext();
+sliderModule.clickPrev();
+sliderModule.autoStopSlider();
 
-        /*sliderModule.navDot();*/
-
-        var numDot = $(this).attr( "id" );
-        var elem = numDot.split('dot');
-        i= elem[1];
-        i= i - 1 ;
-
-        /*$('.dots').removeClass("dotsactive");
-        $(this).addClass("dotsactive");*/
+newsModule.addNews();
 
 
-         sliderModule.sliderli.addClass("fadeout").removeClass("fadein");
-         sliderModule.currentItem = sliderModule.sliderli.eq(i);
-         sliderModule.currentItem.addClass("fadein").removeClass("fadeout");
+$('body').on('click','.add-image', function() {
 
-
-
-    });
-
-
-    $('.next').on('click',function(){ 
-        
-            sliderModule.next();
-    });   
-
-
-    $('.prev').on('click',function(){
-            sliderModule.prev();
-
-    });
-
-
-
-/* AJAX ADD IMAGES */
-
-    $('body').on('click','.add-image', function() {
+        //FAIRE UN MODULE AJAX
 
         $.ajax({
             url : 'http://demo0474378.mockable.io/testCecile',
             type : 'GET',
             dataType: 'JSON',
             success : function(data, statut){ 
-                sliderModule.ajaxSuccess(data, statut);
+                var url1 = data.image1,
+                    url2 = data.image2,
+                    url3 = data.image3;
+
+                $("<li class=\"fadeout\" ><img src='" + url1 + "' /></li>").appendTo("#slider ul");
+                $("<li class=\"fadeout\"><img src='" + url2 + "' /></li>").appendTo("#slider ul");
+                $("<li class=\"fadeout\"><img src='" + url3 + "' /></li>").appendTo("#slider ul");
+                console.log('Call Ajax success');
+
+                sliderModule.updateValues();
             },
                
             error : function(resultat, statut, erreur){
-                sliderModule.ajaxError(resultat, statut, erreur);
+                $('<span> > Une erreur s\'est produite</span>').appendTo(".add-image");
+        console.log('Erreur Call Ajax');
             }
 
         }); //FIN Ajax call
@@ -69,19 +52,12 @@ var parentDiv;
 
 /* NEWS */
 
-    //Ajouter des news
-    $('body').on('click','#add-article', function(){
-        
-        newsModule.addNews();
-
-        return false;
-    });
-
     //Modifier des news
     $('body').on('click','.modify-article', function(){
         
-        newsModule.getNewsValeurs.call(this);
-        newsModule.modifyNews.call(this);
+
+        newsModule.getNewsValeurs(this);
+        newsModule.modifyNews(this);
 
         return false;
     });
@@ -89,8 +65,9 @@ var parentDiv;
     //Valider la modif des news
     $('body').on('click','.save-modarticle', function(){
 
-        newsModule.getNewsValues.call(this);
-        newsModule.newsSave.call(this);
+
+        newsModule.getNewsValues(this);
+        newsModule.newsSave(this);
 
         return false;
     });
@@ -98,7 +75,7 @@ var parentDiv;
     //Annuler la modif des news
     $('body').on('click','.cancel-modarticle', function(){
 
-        newsModule.newsNoModify.call(this);
+        newsModule.newsNoModify(this);
 
         return false;
     });
@@ -107,56 +84,30 @@ var parentDiv;
     $('body').on('click','.delete-article', function(){
         
         //newsModule.getNewsValeurs.call(this);
-        parentDiv = $(this).closest('article.news');
+        parentDiv = $(this).parents('article.news');
         //console.log(parentDiv);
 
 
     });
 
 
-    // Fermer la modale sans supprimer l'article
+    // Fermer la modale
 
     $('body').on('click','.close-mymodal', function(){
 
         $('#myModal').foundation('reveal', 'close');
 
-        return false;
     });
 
 
-        // Fermer la modale en supprimant l'article
+    // Fermer la modale en supprimant l'article
 
     $('body').on('click','.yesdelete-article', function(){
 
         parentDiv.remove();
-        $('#myModal').foundation('reveal', 'close');
-        
-        
+               
     });
 
 
 });/////////////////////Fin chargement JQuery
 
-
-
-
-
-
-////////////////// Commentaires apprentissage
-
-//Automatisation s'il n'y avait que des images
-               /*$.each( data, function( key, val ) {
-                $("<img src='" + val + "' />" ).appendTo("#slider").addClass('fadeout'); //"<li id='" + key + "' ><img src='" + val + "' /></li>"
-            });*/
-                //Ajouter le nombre de dots en fontion du nombre de data
-                /*$.each( data, function( key, val ) {
-                $("<span></span>").appendTo(".nav").addClass('dots'); //"<li id='" + key + "' ><img src='" + val + "' /></li>"
-            });*/
-
-
-                // En passant par un tableau
-
-               /*$.each( data, function( key, val ) {
-                items.push( "<img src='" + val + "' />" ); //"<li id='" + key + "' ><img src='" + val + "' /></li>"
-            });
-               */
