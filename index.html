@@ -48,25 +48,25 @@
 	              	<div class="row">
 		                <div class="large-4 columns">
 		                  	<label>Titre de l'article
-		                    	<input type="text" class="new-title" placeholder="" />
+		                    	<input type="text" class="new-title" required placeholder="" />
 		                  	</label>
 		                </div>
 	              	</div>
 		            <div class="row">
 		                <div class="large-8 columns">
 		                  	<label>Votre article
-		                    	<textarea type="text" class="new-content" placeholder="" ></textarea> 
+		                    	<textarea type="text" class="new-content" required placeholder="" ></textarea> 
 		                  </label>
 		                </div>
 		            </div>
-	              	<button class="button" id="add-article" >Ajouter l'article</button>
+	              	<input class="button" type="submit" id="add-article" value="Ajouter l'article"/>
 	            </form>
           	</section>
         </div>
     </div><!--END ROW ADD NEW ARTICLE-->
 
-    <div class="row"><!--ROW ALL ARTICLES-->
-        <div class=" small-12 columns margtop">
+    <div class="row newfeed"><!--ROW ALL ARTICLES-->
+        <div class=" small-12 columns margtop feed">
           	<section class="wrap" id="news-container">
             	<article class="news">
               		<h2 class="news-title">Titre article</h2>

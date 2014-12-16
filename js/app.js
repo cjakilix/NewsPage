@@ -4,26 +4,26 @@ jQuery(function($){
 
 /* SLIDER */
  
-
-var newsModule = new NewsModule();
-
-var parentDiv;
-
-
 BigSlider.initBigSlider();
 
-newsModule.addNews();
-
+NewsModule.initNewsModule();
 
 $('body').on('click','.add-image', function() {
 
         //FAIRE UN MODULE AJAX
 
+
+
+
         $.ajax({
             url : 'http://demo0474378.mockable.io/testCecile',
             type : 'GET',
             dataType: 'JSON',
-            success : function(data, statut){ 
+            success : function(data, statut){
+
+                //var position = data.image1.search('jpg' || 'gif');
+                //console.log(position + '');
+
                 var url1 = data.image1,
                     url2 = data.image2,
                     url3 = data.image3;
@@ -46,65 +46,6 @@ $('body').on('click','.add-image', function() {
         }); //FIN Ajax call
 
     });//FIN ADD IMAGES
-
-
-/* NEWS */
-
-    //Modifier des news
-    $('body').on('click','.modify-article', function(){
-        
-
-        newsModule.getNewsValeurs(this);
-        newsModule.modifyNews(this);
-
-        return false;
-    });
-
-    //Valider la modif des news
-    $('body').on('click','.save-modarticle', function(){
-
-
-        newsModule.getNewsValues(this);
-        newsModule.newsSave(this);
-
-        return false;
-    });
-
-    //Annuler la modif des news
-    $('body').on('click','.cancel-modarticle', function(){
-
-        newsModule.newsNoModify(this);
-
-        return false;
-    });
-
-    //Supprimer une news
-    $('body').on('click','.delete-article', function(){
-        
-        //newsModule.getNewsValeurs.call(this);
-        parentDiv = $(this).parents('article.news');
-        //console.log(parentDiv);
-
-
-    });
-
-
-    // Fermer la modale
-
-    $('body').on('click','.close-mymodal', function(){
-
-        $('#myModal').foundation('reveal', 'close');
-
-    });
-
-
-    // Fermer la modale en supprimant l'article
-
-    $('body').on('click','.yesdelete-article', function(){
-
-        parentDiv.remove();
-               
-    });
 
 
 });/////////////////////Fin chargement JQuery

@@ -8,7 +8,9 @@ $light-grey : #f2f2f2; /*Light-grey*/
 $dark-grey : #969696 ; /*Dark-grey*/
 $mid-grey : #CCCCCC;
 
-
+[required] {
+   border: 2px dotted orange;
+}
 
 /** Blocs **/
 

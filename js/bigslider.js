@@ -118,7 +118,7 @@ var BigSlider = function(){
     };
 
     return {
-        updateValues : updateValues,
+        updateValues : updateValues,//besoin call ajax
         sliderFade : sliderFade,
         stopSliderFade : stopSliderFade,
         autoStopSlider : autoStopSlider,
