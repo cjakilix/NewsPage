@@ -38,6 +38,8 @@ $('body').on('click','.add-image', function() {
                 console.log('Call Ajax success');
 
                 sliderModule.updateValues();
+                //funtest();
+
             },
                
             error : function(resultat, statut, erreur){
