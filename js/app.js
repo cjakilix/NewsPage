@@ -4,17 +4,13 @@ jQuery(function($){
 
 /* SLIDER */
  
-var sliderModule = new BigSlider();
+
 var newsModule = new NewsModule();
 
 var parentDiv;
 
 
-sliderModule.sliderFade();
-sliderModule.clickDots();
-sliderModule.clickNext();
-sliderModule.clickPrev();
-sliderModule.autoStopSlider();
+BigSlider.initBigSlider();
 
 newsModule.addNews();
 
@@ -37,8 +33,8 @@ $('body').on('click','.add-image', function() {
                 $("<li class=\"fadeout\"><img src='" + url3 + "' /></li>").appendTo("#slider ul");
                 console.log('Call Ajax success');
 
-                sliderModule.updateValues();
-                //funtest();
+                BigSlider.updateValues();
+                //modfun.funtest();
 
             },
                

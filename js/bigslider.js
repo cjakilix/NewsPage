@@ -30,7 +30,7 @@ var BigSlider = function(){
             $('<span id="dot'+(i+1)+'"class="dots haha"></span>').appendTo('.nav');
             i++;
 
-            //console.log('updatesValues / Each Dots auto');
+            console.log('updatesValues / Each Dots auto');
         });
 
     };
@@ -109,7 +109,13 @@ var BigSlider = function(){
         });
     };
 
-    
+    function initBigSlider(){
+        sliderFade();
+        clickDots();
+        clickNext();
+        clickPrev();
+        autoStopSlider();
+    };
 
     return {
         updateValues : updateValues,
@@ -119,19 +125,20 @@ var BigSlider = function(){
         clickNext : clickNext,
         next: next,
         clickPrev : clickPrev,
-        clickDots : clickDots
+        clickDots : clickDots,
+        initBigSlider : initBigSlider
 
     }
 
 
-};
+}();
 
 
-var modfun = function(){
-        //alert('test modfun');
+/*var modfun = function(){
+        alert('test modfun');
 
         function funtest (){
-            //alert('fun test');
+            alert('fun test');
         };
 
         //funtest();
@@ -140,4 +147,4 @@ var modfun = function(){
         funtest : funtest
     }
 
-}();
+}();*/
