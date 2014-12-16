@@ -125,3 +125,19 @@ var BigSlider = function(){
 
 
 };
+
+
+var modfun = function(){
+        //alert('test modfun');
+
+        function funtest (){
+            //alert('fun test');
+        };
+
+        //funtest();
+
+    return {
+        funtest : funtest
+    }
+
+}();
