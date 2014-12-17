@@ -101,8 +101,6 @@ var BigSlider = function(){
 
             i = $(this).index();
 
-            //console.log(i);
-
              sliderli.addClass('fadeout').removeClass('fadein');
              currentItem = sliderli.eq(i);
              currentItem.addClass('fadein').removeClass('fadeout');
@@ -132,19 +130,3 @@ var BigSlider = function(){
 
 
 }();
-
-
-/*var modfun = function(){
-        alert('test modfun');
-
-        function funtest (){
-            alert('fun test');
-        };
-
-        //funtest();
-
-    return {
-        funtest : funtest
-    }
-
-}();*/

@@ -1,9 +1,9 @@
 var NewsModule = function(){
     // Sortir toutes les variables et les nommer différement
 
-        var parentDiv;
-        var newsTitleValue;
-        var newsContentValue;
+    var parentDiv;
+    var newsTitleValue;
+    var newsContentValue;
 
 
 
@@ -17,7 +17,7 @@ var NewsModule = function(){
                 newsContent = $('.add-news .new-content').val();
 
 
-            $('section.add-news p.redalert').remove();
+            $('.add-news p.redalert').remove();
 
 
             newsTitle ? true : false;
@@ -31,7 +31,13 @@ var NewsModule = function(){
                    console.log('yes news container');
                     
                 }else{
-                    $('.feed').append('<section class="wrap" id="news-container"></section>');
+                    //On ajoute le conteneur de news + structure fondation
+                    $('.row-add').after('<div class="row row-feed">'+
+                        '<div class=" small-12 columns margtop feed">'+
+                        '<section class="wrap" id="news-container">'+
+                        '</section>'+
+                        '</div>'+
+                        '</div>');
                     console.log('no news container');
 
                 };
@@ -62,9 +68,7 @@ var NewsModule = function(){
 
             parentDiv = $(that).parents('article.news');
 
-        /*var modButton = $(this),
-            suppButton = parentDiv.children('button.delete-article'),*/
-            var newsTitleContainer = parentDiv.children('.news-title'),//Selectionne tout le h2 et pas le texte
+        var newsTitleContainer = parentDiv.children('.news-title'),//Selectionne tout le h2 et pas le texte
             newsContentContainer = parentDiv.children('.news-content');
             newsTitle = newsTitleContainer.text(),
             newsContent = newsContentContainer.text();
@@ -73,8 +77,6 @@ var NewsModule = function(){
             console.log(parentDiv);
 
     };
-
-
 
 
     function modifyNews (thut){
@@ -103,6 +105,8 @@ var NewsModule = function(){
               '<button class="button tiny cancel-modarticle" >Annuler</button>'+
             '</form>').appendTo(parentDiv);
     };
+
+    
 
     function clickModifyNews (){
         $('body').on('click','.modify-article', function(){
@@ -197,7 +201,6 @@ var NewsModule = function(){
         $('body').on('click','.delete-article', function(){
             console.log(this);
         
-        //newsModule.getNewsValeurs.call(this);
         parentDiv = $(this).parents('article.news');
         console.log("delete article");
 
@@ -213,8 +216,10 @@ var NewsModule = function(){
         parentDiv.remove();
 
         if( !$.trim( $('#news-container').html() ).length ) {
-            $('#news-container').remove();
-            console.log('notext');
+            
+            $('.row-feed').remove(); //Pas de news, on supprime le conteneur de news + structure fondation
+            console.log('notext, delete container de news');
+
         }else{
             console.log('not empty !');
         }
