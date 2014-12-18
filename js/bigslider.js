@@ -1,6 +1,4 @@
-// Module BigSlider
-
-var BigSlider = function(){
+var BigSlider = (function(){
 
 
     var sliderli;
@@ -9,10 +7,7 @@ var BigSlider = function(){
     var nbrliIndex;
     var i;
     var InteralvId;
-
-    var nbrDots;
     var currentDot;
-    var d;
 
     updateValues();
 
@@ -28,24 +23,17 @@ var BigSlider = function(){
         i=0;
         currentItem = sliderli.eq(i);
 
-
-        
-
         
         $('.dots').remove();
         $.each(sliderli, function() {
-            d=0;
+            var d=0;
             $('<span id="dot'+(d+1)+'"class="dots haha"></span>').appendTo('.nav');
             d++;
 
             console.log('updatesValues / Each Dots auto OK');
         });
 
-
-        //nbrDots = $('.dots').length;
-        //console.log(nbrDots);
         currentDot = $('body').find('.dots').eq(i);
-
         currentDot.addClass( 'dotsactive' );
 
 
@@ -81,19 +69,12 @@ var BigSlider = function(){
 
     function next(){
         i++;
-        sliderli.addClass('fadeout').removeClass('fadein');
-        $('.dots').removeClass('dotsactive');
 
         if( i > nbrliIndex ){
             i = 0;
         }
 
-        currentItem = sliderli.eq(i); 
-        currentItem.addClass('fadein').removeClass('fadeout');
-
-        currentDot = $('body').find('.dots').eq(i);
-        currentDot.addClass( 'dotsactive' );
-
+        hideShow();
 
     };
 
@@ -104,18 +85,13 @@ var BigSlider = function(){
         $('body').on('click','.prev', function(){ 
         
             i--; 
-            sliderli.addClass('fadeout').removeClass('fadein');
-            $('.dots').removeClass('dotsactive');
+
 
             if( i < 0 ){
                 i = nbrliIndex;
             }
 
-            currentItem = sliderli.eq(i);
-            currentItem.addClass('fadein').removeClass('fadeout');
-
-            currentDot = $('body').find('.dots').eq(i);
-            currentDot.addClass('dotsactive');
+            hideShow();
         });
     };
 
@@ -126,15 +102,22 @@ var BigSlider = function(){
 
             i = $(this).index();
 
-             sliderli.addClass('fadeout').removeClass('fadein');
-             $('.dots').removeClass('dotsactive');
-
-             currentItem = sliderli.eq(i);
-             currentItem.addClass('fadein').removeClass('fadeout');
-
-             currentDot = $('body').find('.dots').eq(i);
-             currentDot.addClass('dotsactive');
+            hideShow();
         });
+    };
+
+
+    function hideShow(){
+
+        sliderli.addClass('fadeout').removeClass('fadein');
+        $('.dots').removeClass('dotsactive');
+
+        currentItem = sliderli.eq(i);
+
+        currentItem.addClass('fadein').removeClass('fadeout');
+
+        currentDot = $('body').find('.dots').eq(i);
+        currentDot.addClass('dotsactive');
     };
 
     function initBigSlider(){
@@ -147,16 +130,9 @@ var BigSlider = function(){
 
     return {
         updateValues : updateValues,//besoin call ajax
-        sliderFade : sliderFade,
-        stopSliderFade : stopSliderFade,
-        autoStopSlider : autoStopSlider,
-        clickNext : clickNext,
-        next: next,
-        clickPrev : clickPrev,
-        clickDots : clickDots,
         initBigSlider : initBigSlider
 
     }
 
 
-}();
+}());

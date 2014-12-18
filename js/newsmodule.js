@@ -1,4 +1,4 @@
-var NewsModule = function(){
+var NewsModule = (function(){
     // Sortir toutes les variables et les nommer différement
 
     var parentDiv;
@@ -258,4 +258,4 @@ var NewsModule = function(){
     }
 
 
-}();
+}());
