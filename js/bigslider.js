@@ -1,6 +1,4 @@
-// Module BigSlider
-
-var BigSlider = function(){
+var BigSlider = (function(){
 
 
     var sliderli;
@@ -9,6 +7,7 @@ var BigSlider = function(){
     var nbrliIndex;
     var i;
     var InteralvId;
+    var currentDot;
 
     updateValues();
 
@@ -22,29 +21,33 @@ var BigSlider = function(){
         nbrli = sliderli.length;
         nbrliIndex = nbrli -1;
         i=0;
-        currentItem = $('#slider li').eq(i);
+        currentItem = sliderli.eq(i);
 
         
         $('.dots').remove();
         $.each(sliderli, function() {
-            $('<span id="dot'+(i+1)+'"class="dots haha"></span>').appendTo('.nav');
-            i++;
+            var d=0;
+            $('<span id="dot'+(d+1)+'"class="dots haha"></span>').appendTo('.nav');
+            d++;
 
-            //console.log('updatesValues / Each Dots auto');
+            console.log('updatesValues / Each Dots auto OK');
         });
+
+        currentDot = $('body').find('.dots').eq(i);
+        currentDot.addClass( 'dotsactive' );
+
+
 
     };
 
 
     function sliderFade() {
       InteralvId = setInterval(next, 3000);
-      //console.log('start sliderFade');
     };
 
 
     function stopSliderFade() {
      clearInterval(InteralvId);
-     //console.log('stop sliderFade');
     };
 
 
@@ -66,14 +69,13 @@ var BigSlider = function(){
 
     function next(){
         i++;
-        sliderli.addClass('fadeout').removeClass('fadein'); 
 
         if( i > nbrliIndex ){
             i = 0;
         }
 
-        currentItem = sliderli.eq(i); 
-        currentItem.addClass('fadein').removeClass('fadeout'); 
+        hideShow();
+
     };
 
 
@@ -83,14 +85,13 @@ var BigSlider = function(){
         $('body').on('click','.prev', function(){ 
         
             i--; 
-            sliderli.addClass('fadeout').removeClass('fadein');
+
 
             if( i < 0 ){
                 i = nbrliIndex;
             }
 
-            currentItem = sliderli.eq(i);
-            currentItem.addClass('fadein').removeClass('fadeout');
+            hideShow();
         });
     };
 
@@ -101,43 +102,37 @@ var BigSlider = function(){
 
             i = $(this).index();
 
-            //console.log(i);
-
-             sliderli.addClass('fadeout').removeClass('fadein');
-             currentItem = sliderli.eq(i);
-             currentItem.addClass('fadein').removeClass('fadeout');
+            hideShow();
         });
     };
 
-    
+
+    function hideShow(){
+
+        sliderli.addClass('fadeout').removeClass('fadein');
+        $('.dots').removeClass('dotsactive');
+
+        currentItem = sliderli.eq(i);
+
+        currentItem.addClass('fadein').removeClass('fadeout');
+
+        currentDot = $('body').find('.dots').eq(i);
+        currentDot.addClass('dotsactive');
+    };
+
+    function initBigSlider(){
+        sliderFade();
+        clickDots();
+        clickNext();
+        clickPrev();
+        autoStopSlider();
+    };
 
     return {
-        updateValues : updateValues,
-        sliderFade : sliderFade,
-        stopSliderFade : stopSliderFade,
-        autoStopSlider : autoStopSlider,
-        clickNext : clickNext,
-        next: next,
-        clickPrev : clickPrev,
-        clickDots : clickDots
+        updateValues : updateValues,//besoin call ajax
+        initBigSlider : initBigSlider
 
     }
 
 
-};
-
-
-var modfun = function(){
-        //alert('test modfun');
-
-        function funtest (){
-            //alert('fun test');
-        };
-
-        //funtest();
-
-    return {
-        funtest : funtest
-    }
-
-}();
+}());

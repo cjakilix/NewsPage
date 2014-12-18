@@ -9,7 +9,6 @@ $dark-grey : #969696 ; /*Dark-grey*/
 $mid-grey : #CCCCCC;
 
 
-
 /** Blocs **/
 
 .wrap {
@@ -180,13 +179,13 @@ h1 {
     margin: 0 5px 0 0;
 
     &:hover {
-        background: $dark-grey;
+        background: #007396;
 
     }
 }
 
 .dotsactive {
-    background: $dark-grey;
+    background: #007396;
 }
 
 /*
